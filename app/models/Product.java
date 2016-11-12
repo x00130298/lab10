@@ -21,6 +21,9 @@ public class Product extends Model {
     private String name;
 
     @Constraints.Required
+    private String category;
+
+    @Constraints.Required
     private String description;
 
     @Constraints.Required
@@ -90,4 +93,11 @@ public class Product extends Model {
         this.price = price;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }
