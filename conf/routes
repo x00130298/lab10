@@ -8,7 +8,8 @@ GET     /                     controllers.HomeController.index(name: String ?="v
 
 GET     /about                      controllers.HomeController.about
 
-GET     /products                   controllers.HomeController.products
+# products accepts a parameter default to 0 (Long)
+GET     /products                   controllers.HomeController.products(cat:Long ?=0L)
 
 # Request to load the add product form
 GET     /addproduct                 controllers.HomeController.addProduct
@@ -17,10 +18,10 @@ GET     /addproduct                 controllers.HomeController.addProduct
 POST    /addProductSubmit           controllers.HomeController.addProductSubmit
 
 # Delete a product by an id passed as a parameter
-GET    /delProduct/:id            controllers.HomeController.deleteProduct(id: Integer)
+GET    /delProduct/:id            controllers.HomeController.deleteProduct(id: Long)
 
 # Update a product by id
-GET	    /updateProduct/:id			controllers.HomeController.updateProduct(id: Integer)
+GET	    /updateProduct/:id			controllers.HomeController.updateProduct(id: Long)
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

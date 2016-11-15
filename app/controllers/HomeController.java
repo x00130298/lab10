@@ -36,11 +36,23 @@ public class HomeController extends Controller {
         return ok(about.render());
     }
 
-    public Result products() {
+    public Result products(Long cat) {
 
         // Get list of all categories in ascending order
-        List<Product> productsList = Product.findAll();
-        return ok(products.render(productsList));
+        List<Category> categoriesList = Category.findAll();
+        List<Product> productsList = new ArrayList<Product>();
+
+        if (cat == 0) {
+            // Get list of all categories in ascending order
+            productsList = Product.findAll();
+        }
+        else {
+            // Get products for selected category
+            // Find category first then extract products for that cat.
+            productsList = Category.find.ref(cat).getProducts();
+        }
+
+        return ok(products.render(productsList, categoriesList));
     }
 
     // Render and return  the add new product page
@@ -85,13 +97,13 @@ public class HomeController extends Controller {
         flash("success", "Product " + p.getName() + " has been created/ updated");
 
         // Redirect to the admin home
-        return redirect(controllers.routes.HomeController.products());
+        return redirect(controllers.routes.HomeController.products(0));
     }
 
     // Update a product by ID
     // called when edit button is pressed
     @Transactional
-    public Result updateProduct(Integer id) {
+    public Result updateProduct(Long id) {
 
         Product p;
         Form<Product> productForm;
@@ -113,7 +125,7 @@ public class HomeController extends Controller {
 
     // Delete Product by id
     @Transactional
-    public Result deleteProduct(Integer id) {
+    public Result deleteProduct(Long id) {
 
         // find product by id and call delete method
         Product.find.ref(id).delete();
@@ -121,6 +133,6 @@ public class HomeController extends Controller {
         flash("success", "Product has been deleted");
 
         // Redirect to products page
-        return redirect(routes.HomeController.products());
+        return redirect(routes.HomeController.products(0));
     }
 }
