@@ -15,13 +15,17 @@
 		<!-- Build the form, adding an input for each field -->
 		<!-- Note the label parameter -->
 		@inputText(addProductForm("name"), '_label -> "Name",'class -> "form-control")
+		@inputText(addProductForm("category"), '_label -> "Category",'class -> "form-control")
 		@inputText(addProductForm("description"), '_label -> "Description",'class -> "form-control")
 		@inputText(addProductForm("stock"), '_label -> "Stock",'class -> "form-control")
 		@inputText(addProductForm("price"), '_label -> "Price",'class -> "form-control")
 
+		<!-- Hidden ID field - required for product updates -->
+		@inputText(addProductForm("id"), '_label -> "", 'hidden -> "hidden")
+
 	<!-- Add a submit button -->
   <div class="actions">
-      <input type="submit" value="Add Product" class="btn btn-primary">
+      <input type="submit" value="Save" class="btn btn-primary">
 			<a href="@routes.HomeController.products()"><button class="btn btn-warning">Cancel</button>
 	  		</a>
   </div>
