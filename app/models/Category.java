@@ -1,10 +1,6 @@
 package models;
 
-import java.util.*;
-import javax.persistence.*;
 
-import com.avaje.ebean.Model;
-import play.data.validation.*;
 
 // Product Entity managed by the ORM
 @Entity
